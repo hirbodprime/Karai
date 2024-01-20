@@ -20,7 +20,7 @@ class ResendCodeView(APIView):
             verification_code = str(random.randint(10000,99999))  # Implement this function
             user.sms_verification_code = verification_code
             user.save()
-            send_sms(phone_number, verification_code)  # Send SMS
+            # send_sms(phone_number, verification_code)  # Send SMS
             return Response({"message": "Verification code resent."})
         except CustomUser.DoesNotExist:
             return Response({"error": "User not found"}, status=status.HTTP_404_NOT_FOUND)
@@ -34,7 +34,7 @@ class SignupView(APIView):
             verification_code = str(random.randint(10000,99999))  # Implement this function
             user.sms_verification_code = verification_code
             user.save()
-            send_sms_code(user.phone_number, verification_code)  # Send SMS
+            # send_sms_code(user.phone_number, verification_code)  # Send SMS
             return Response({'message':f'Verification code sent to {user.phone_number}'}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
